@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="padding_5dp">5dp</dimen>
+    <dimen name="padding_15dp">15dp</dimen>
+
+    <dimen name="margin_5dp">5dp</dimen>
+    <dimen name="margin_2dp">2dp</dimen>
+    <dimen name="margin_10dp">10dp</dimen>
+    <dimen name="margin_15dp">15dp</dimen>
+    <dimen name="margin_16dp">16dp</dimen>
+
+    <dimen name="width_15dp">15dp</dimen>
+    <dimen name="height_15dp">15dp</dimen>
+
+    <dimen name="size_12sp">12sp</dimen>
+    <dimen name="size_10sp">10sp</dimen>
+    <dimen name="size_8sp">8sp</dimen>
+    <dimen name="size_18sp">18sp</dimen>
+
+</resources>
