@@ -1,6 +1,9 @@
 package com.gist.demo.list.main.data;
 
 import java.io.Serializable;
+/**
+ * Created by KowsalyaM on 26/10/22.
+ */
 
 public class HotGistOwnerModel implements Serializable {
 

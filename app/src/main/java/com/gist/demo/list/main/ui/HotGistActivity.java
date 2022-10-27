@@ -15,12 +15,16 @@ import com.gist.demo.list.main.ui.viewmodel.HotGistsViewModel;
 import com.gist.demo.list.main.data.HotGistModel;
 
 import java.util.List;
+/**
+ * Created by KowsalyaM on 26/10/22.
+ */
 
-public class HotGistActivity extends AppCompatActivity{
+public class HotGistActivity extends AppCompatActivity {
 
     private HotGistActivityBinding binding;
     HotGistsViewModel hotGistsViewModel;
     HotGistsAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +36,7 @@ public class HotGistActivity extends AppCompatActivity{
     private void populateData() {
         hotGistsViewModel = ViewModelProviders.of(this).get(HotGistsViewModel.class);
         hotGistsViewModel.getHotGists();
-        adapter = new HotGistsAdapter(getApplicationContext(),hotGistsViewModel);
+        adapter = new HotGistsAdapter(getApplicationContext(), hotGistsViewModel);
         binding.recycler.setLayoutManager(new LinearLayoutManager(this));
         binding.recycler.setAdapter(adapter);
 

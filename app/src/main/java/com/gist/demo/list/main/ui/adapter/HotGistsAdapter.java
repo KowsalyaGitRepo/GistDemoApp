@@ -28,8 +28,11 @@ import com.gist.demo.list.utils.SharedPreference;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+/**
+ * Created by KowsalyaM on 26/10/22.
+ */
 
-public class HotGistsAdapter extends RecyclerView.Adapter<HotGistsAdapter.HotGistsViewHolder> implements GistClickListener  {
+public class HotGistsAdapter extends RecyclerView.Adapter<HotGistsAdapter.HotGistsViewHolder> implements GistClickListener {
     private List<HotGistModel> hotGistModelList = new ArrayList<>();
     private Context context;
 
@@ -44,7 +47,8 @@ public class HotGistsAdapter extends RecyclerView.Adapter<HotGistsAdapter.HotGis
                 LayoutInflater.from(parent.getContext()),
                 R.layout.hot_gist_item, parent, false);
 
-        return new HotGistsViewHolder(binding);    }
+        return new HotGistsViewHolder(binding);
+    }
 
     @Override
     public void onBindViewHolder(@NonNull HotGistsViewHolder holder, int position) {
@@ -56,17 +60,17 @@ public class HotGistsAdapter extends RecyclerView.Adapter<HotGistsAdapter.HotGis
          GET List by username
          **/
         Call<List<HotGistModel>> call = ApiClient.getINSTANCE().getHotGistsByUserName(dataModel.getOwner().getlogin());
-        call.enqueue(new Callback<List<HotGistModel> >() {
+        call.enqueue(new Callback<List<HotGistModel>>() {
             @Override
-            public void onResponse(Call<List<HotGistModel> > call, Response<List<HotGistModel> > response) {
-                Log.d("TAG",response.code()+"");
+            public void onResponse(Call<List<HotGistModel>> call, Response<List<HotGistModel>> response) {
+                Log.d("TAG", response.code() + "");
                 int size = response.body().size();
-                if(size>=5){
-                    for(HotGistModel model:hotGistModelList){
-                        if(model.getOwner().getlogin().equalsIgnoreCase(dataModel.getOwner().getlogin())){
+                if (size >= 5) {
+                    for (HotGistModel model : hotGistModelList) {
+                        if (model.getOwner().getlogin().equalsIgnoreCase(dataModel.getOwner().getlogin())) {
                             model.setCountShared(size);
                             holder.gistItemBinding.tvHotGistShared.setVisibility(View.VISIBLE);
-                            holder.gistItemBinding.tvHotGistShared.setText("Shared:\t"+ size);
+                            holder.gistItemBinding.tvHotGistShared.setText("Shared:\t" + size);
                         }
                     }
                 }
@@ -78,30 +82,30 @@ public class HotGistsAdapter extends RecyclerView.Adapter<HotGistsAdapter.HotGis
             }
 
         });
-        if(checkFavouriteItem(dataModel)){
+        if (checkFavouriteItem(dataModel)) {
 
             Drawable starFilled = ResourcesCompat.getDrawable(context.getResources(), R.drawable.ic_favourite_filled, null);
-            starFilled.setBounds(0,0,24,24);
+            starFilled.setBounds(0, 0, 24, 24);
             holder.gistItemBinding.chkHotGistFavorite.setBackground(starFilled);
 
-        }else{
+        } else {
 
-            Drawable starEmpty = ResourcesCompat.getDrawable(context.getResources(), R.drawable.ic_favourite_empty,null);
-            starEmpty.setBounds(0,0,24,24);
+            Drawable starEmpty = ResourcesCompat.getDrawable(context.getResources(), R.drawable.ic_favourite_empty, null);
+            starEmpty.setBounds(0, 0, 24, 24);
             holder.gistItemBinding.chkHotGistFavorite.setBackground(starEmpty);
         }
 
         holder.gistItemBinding.chkHotGistFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(checkFavouriteItem(dataModel)){
-                    SharedPreference.getInstance().setFavourite(context,dataModel.id,true);
+                if (checkFavouriteItem(dataModel)) {
+                    SharedPreference.getInstance().setFavourite(context, dataModel.id, true);
                     Drawable starFilled = ResourcesCompat.getDrawable(context.getResources(), R.drawable.ic_favourite_filled, null);
                     starFilled.setBounds(0, 0, 24, 24);
                     view.setBackground(starFilled);
 
                 } else {
-                    SharedPreference.getInstance().setFavourite(context,dataModel.id,false);
+                    SharedPreference.getInstance().setFavourite(context, dataModel.id, false);
                     Drawable starEmpty = ResourcesCompat.getDrawable(context.getResources(), R.drawable.ic_favourite_empty, null);
                     starEmpty.setBounds(0, 0, 24, 24);
                     view.setBackground(starEmpty);
@@ -121,26 +125,25 @@ public class HotGistsAdapter extends RecyclerView.Adapter<HotGistsAdapter.HotGis
     }
 
 
-
     private boolean checkFavouriteItem(HotGistModel model) {
         boolean check = false;
 
-        if(model!=null){
-            check = SharedPreference.getInstance().getFavourite(context,model.getId());
+        if (model != null) {
+            check = SharedPreference.getInstance().getFavourite(context, model.getId());
         }
         return check;
     }
 
     @Override
     public void cardClicked(HotGistModel gistModel) {
-            Intent intent = new Intent(context, HotGistDetailActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.putExtra("hot_gist_model", gistModel);
-            context.startActivity(intent);
+        Intent intent = new Intent(context, HotGistDetailActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("hot_gist_model", gistModel);
+        context.startActivity(intent);
     }
 
 
-    public class HotGistsViewHolder extends RecyclerView.ViewHolder{
+    public class HotGistsViewHolder extends RecyclerView.ViewHolder {
 
         public HotGistItemBinding gistItemBinding;
 

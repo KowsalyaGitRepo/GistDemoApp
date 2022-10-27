@@ -9,10 +9,14 @@ import io.reactivex.Single;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+/**
+ * Created by KowsalyaM on 26/10/22.
+ */
 
 public interface ApiInterface {
     @GET("/gists/public?since")
     public Single<List<HotGistModel>> getHotGists();
+
     @GET("/users/{username}/gists?since")
     public Call<List<HotGistModel>> getHotGistsByUserName(@Path("username") String username);
 

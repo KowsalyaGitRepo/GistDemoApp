@@ -14,6 +14,9 @@ import com.gist.demo.app.R;
 import com.gist.demo.app.databinding.HotGistDetailActivityBinding;
 import com.gist.demo.list.main.data.HotGistModel;
 import com.gist.demo.list.utils.SharedPreference;
+/**
+ * Created by KowsalyaM on 26/10/22.
+ */
 
 public class HotGistDetailActivity extends AppCompatActivity implements View.OnClickListener {
     private HotGistDetailActivityBinding binding;
@@ -46,9 +49,9 @@ public class HotGistDetailActivity extends AppCompatActivity implements View.OnC
                 starEmpty.setBounds(0, 0, 24, 24);
                 binding.chkHotGistFavorite.setBackground(starEmpty);
             }
-            if(!model.getOwner().getlogin().isEmpty()){
+            if (!model.getOwner().getlogin().isEmpty()) {
                 binding.tvHotGistShared.setVisibility(View.VISIBLE);
-                binding.tvHotGistShared.setText("Shared:\t"+ model.getCountShared());
+                binding.tvHotGistShared.setText("Shared:\t" + model.getCountShared());
             }
             binding.chkHotGistFavorite.setOnClickListener(this);
         }

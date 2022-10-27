@@ -9,12 +9,15 @@ import com.gist.demo.list.main.data.HotGistModel;
 import com.gist.demo.list.main.network.ApiClient;
 
 import java.util.List;
+
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 
 import io.reactivex.schedulers.Schedulers;
-
+/**
+ * Created by KowsalyaM on 26/10/22.
+ */
 
 public class HotGistsViewModel extends ViewModel {
     public MutableLiveData<List<HotGistModel>> gistsMutableLiveData = new MutableLiveData<>();
@@ -27,7 +30,7 @@ public class HotGistsViewModel extends ViewModel {
                 .observeOn(AndroidSchedulers.mainThread());
 
         compositeDisposable.add(observable.subscribe(o -> gistsMutableLiveData.setValue(o)
-                ,throwable -> Log.e("TAG", "Throwable " + throwable.getMessage())));
+                , throwable -> Log.e("TAG", "Throwable " + throwable.getMessage())));
 
     }
 
